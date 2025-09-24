@@ -3,18 +3,21 @@ import LoadingScreen from './components/LoadingScreen';
 import Slide from './components/Slide';
 import Navigation from './components/Navigation';
 import ProgressBar from './components/ProgressBar';
+import Chatbot from './components/Chatbot';
 import { SLIDES_DATA } from './constants';
+
+type View = 'slides' | 'chatbot';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [view, setView] = useState<View>('slides');
 
   useEffect(() => {
-    // Simulate loading assets for the presentation
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2-second loading screen for demonstration
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -25,9 +28,8 @@ const App: React.FC = () => {
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentSlide(newIndex);
-      // Fade the new slide back in
-      setTimeout(() => setIsTransitioning(false), 50); // Short delay to allow re-render
-    }, 300); // This duration should match the fade-out transition
+      setTimeout(() => setIsTransitioning(false), 50);
+    }, 300);
   };
 
   const handleNext = () => {
@@ -58,18 +60,24 @@ const App: React.FC = () => {
           <LoadingScreen />
         ) : (
           <>
-            <ProgressBar current={currentSlide} total={SLIDES_DATA.length} />
-            <main className="flex-grow overflow-y-auto relative">
-                <div className={slideContainerClass}>
+            {view === 'slides' && (
+              <>
+                <ProgressBar current={currentSlide} total={SLIDES_DATA.length} />
+                <main className="flex-grow overflow-y-auto relative">
+                  <div className={slideContainerClass}>
                     <Slide content={SLIDES_DATA[currentSlide]} />
-                </div>
-            </main>
-            <Navigation
-              onPrev={handlePrev}
-              onNext={handleNext}
-              currentSlide={currentSlide}
-              totalSlides={SLIDES_DATA.length}
-            />
+                  </div>
+                </main>
+                <Navigation
+                  onPrev={handlePrev}
+                  onNext={handleNext}
+                  onChatbotClick={() => setView('chatbot')}
+                  currentSlide={currentSlide}
+                  totalSlides={SLIDES_DATA.length}
+                />
+              </>
+            )}
+            {view === 'chatbot' && <Chatbot onBack={() => setView('slides')} />}
           </>
         )}
       </div>
