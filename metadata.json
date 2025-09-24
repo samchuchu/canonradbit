@@ -1,0 +1,5 @@
+{
+  "name": "Mobile Presentation Slides",
+  "description": "A simple and elegant mobile-first presentation slide deck created with React and Tailwind CSS. It features a loading screen and navigation controls for a seamless user experience.",
+  "requestFramePermissions": []
+}
