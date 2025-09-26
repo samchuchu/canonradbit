@@ -29,12 +29,22 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(scrollToBottom, [messages, isLoading]);
+  useEffect(() => {
+    const container = chatContainerRef.current;
+    if (container) {
+      // We consider the user to be at the bottom if they are within 100px of it before new content is added.
+      const isScrolledToBottom = container.scrollHeight - container.clientHeight <= container.scrollTop + 100;
+      
+      if (isScrolledToBottom) {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+        // On initial render, scroll to bottom
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isLoading]);
 
   const handleSendMessage = async () => {
     const trimmedInput = inputValue.trim();
@@ -97,7 +107,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
       </header>
 
       {/* Message Area */}
-      <main className="flex-grow p-4 overflow-y-auto space-y-4">
+      <main ref={chatContainerRef} className="flex-grow p-4 overflow-y-auto space-y-4">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`p-3 rounded-lg max-w-xs shadow-sm ${msg.sender === 'user' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800'}`}>

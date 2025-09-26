@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SlideContent } from '../types';
 
 interface SlideProps {
@@ -19,6 +19,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
   const [showSlide2Bubble1, setShowSlide2Bubble1] = useState(false);
   const [showSlide2Bubble2, setShowSlide2Bubble2] = useState(false);
 
+  const slide1BubblesRef = useRef<HTMLDivElement>(null);
+  const slide2BubblesRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Reset all bubble states on slide change
     setShowBubble1(false);
@@ -31,14 +34,17 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     setShowSlide2Bubble1(false);
     setShowSlide2Bubble2(false);
 
+    const initialDelay = 500; // ms to wait before the first bubble
+    const interval = 5000; // 5 seconds between bubbles
+
     if (content.id === 1) {
-      const timer1 = setTimeout(() => setShowBubble1(true), 500);
-      const timer2 = setTimeout(() => setShowBubble2(true), 3500);
-      const timer3 = setTimeout(() => setShowBubble3(true), 6500);
-      const timer4 = setTimeout(() => setShowBubble4(true), 8500);
-      const timer5 = setTimeout(() => setShowBubble5(true), 11500);
-      const timer6 = setTimeout(() => setShowBubble6(true), 14500);
-      const timer7 = setTimeout(() => setShowBubble7(true), 16500);
+      const timer1 = setTimeout(() => setShowBubble1(true), initialDelay);
+      const timer2 = setTimeout(() => setShowBubble2(true), initialDelay + interval * 1);
+      const timer3 = setTimeout(() => setShowBubble3(true), initialDelay + interval * 2);
+      const timer4 = setTimeout(() => setShowBubble4(true), initialDelay + interval * 3);
+      const timer5 = setTimeout(() => setShowBubble5(true), initialDelay + interval * 4);
+      const timer6 = setTimeout(() => setShowBubble6(true), initialDelay + interval * 5);
+      const timer7 = setTimeout(() => setShowBubble7(true), initialDelay + interval * 6);
 
       return () => {
         clearTimeout(timer1);
@@ -50,14 +56,26 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         clearTimeout(timer7);
       };
     } else if (content.id === 2) {
-      const timer1 = setTimeout(() => setShowSlide2Bubble1(true), 1000);
-      const timer2 = setTimeout(() => setShowSlide2Bubble2(true), 4000); // 1000ms + 3000ms
+      const timer1 = setTimeout(() => setShowSlide2Bubble1(true), initialDelay);
+      const timer2 = setTimeout(() => setShowSlide2Bubble2(true), initialDelay + interval * 1);
        return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
       };
     }
   }, [content.id]);
+
+  useEffect(() => {
+    if (slide1BubblesRef.current) {
+      slide1BubblesRef.current.scrollTop = slide1BubblesRef.current.scrollHeight;
+    }
+  }, [showBubble1, showBubble2, showBubble3, showBubble4, showBubble5, showBubble6, showBubble7]);
+
+  useEffect(() => {
+    if (slide2BubblesRef.current) {
+      slide2BubblesRef.current.scrollTop = slide2BubblesRef.current.scrollHeight;
+    }
+  }, [showSlide2Bubble1, showSlide2Bubble2]);
 
   const renderContent = () => {
     switch (content.type) {
@@ -111,8 +129,8 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
 
       {/* Slide 1 Conversation */}
       {content.id === 1 && (
-        <div className="absolute bottom-20 right-4 flex flex-col items-end space-y-2">
-          <div className="flex flex-col items-end space-y-2 max-w-xs">
+        <div className="absolute bottom-20 right-4">
+          <div ref={slide1BubblesRef} className="flex flex-col items-end space-y-2 max-w-xs max-h-[45vh] overflow-y-auto pr-2 pb-8">
             {showBubble1 && (
               <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
                 <p className="text-base text-gray-800">
@@ -188,14 +206,14 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               </div>
             )}
           </div>
-          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-book.gif" alt="Bunny reading a book" className="w-40 h-auto" />
+          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-book.gif" alt="Bunny reading a book" className="block w-40 h-auto ml-auto -mt-24 relative" />
         </div>
       )}
 
       {/* Slide 2 Conversation */}
       {content.id === 2 && (
-        <div className="absolute bottom-20 right-4 flex flex-col items-end space-y-2">
-            <div className="flex flex-col items-end space-y-2 max-w-xs">
+        <div className="absolute bottom-20 right-4">
+            <div ref={slide2BubblesRef} className="flex flex-col items-end space-y-2 max-w-xs max-h-[45vh] overflow-y-auto pr-2 pb-8">
               {showSlide2Bubble1 && (
                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
                   <p className="text-base text-gray-800">
@@ -217,7 +235,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
             </div>
-          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-laptop.gif" alt="Bunny with laptop" className="w-40 h-auto" />
+          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-laptop.gif" alt="Bunny with laptop" className="block w-40 h-auto ml-auto -mt-20 relative" />
         </div>
       )}
     </div>
