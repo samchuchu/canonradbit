@@ -47,9 +47,9 @@ const App: React.FC = () => {
   const slideContainerClass = `absolute inset-0 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`;
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center font-sans bg-gray-100 p-4">
+    <div className="h-screen w-screen flex md:items-center md:justify-center font-sans bg-gray-100 md:p-4">
       <div
-        className="relative w-full max-w-sm h-[85vh] max-h-[750px] rounded-3xl shadow-2xl overflow-hidden flex flex-col border-4 border-gray-800"
+        className="relative w-full h-full md:max-w-sm md:h-[85vh] md:max-h-[750px] md:rounded-3xl md:shadow-2xl overflow-hidden flex flex-col md:border-4 md:border-gray-800"
         style={{
           backgroundImage: `url('https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/cloudbg.png')`,
           backgroundSize: 'cover',

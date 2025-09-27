@@ -129,113 +129,114 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
 
       {/* Slide 1 Conversation */}
       {content.id === 1 && (
-        <div className="absolute bottom-20 right-4">
-          <div ref={slide1BubblesRef} className="flex flex-col items-end space-y-2 max-w-xs max-h-[45vh] overflow-y-auto pr-2 pb-8">
+        <div className="absolute bottom-28 left-4 right-4 flex justify-between items-end">
+          <div ref={slide1BubblesRef} className="flex flex-col items-start space-y-2 max-w-xs max-h-[55vh] overflow-y-auto pl-2 pb-8">
             {showBubble1 && (
-              <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+              <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                 <p className="text-base text-gray-800">
                   "5,759 cases in males"<br/>
                   "3,534 cases in females"
                 </p>
-                <a href="https://www.nccs.com.sg/your-care/about-cancer/cancer-statistics" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                <a href="https://www.nccs.com.sg/your-care/about-cancer/cancer-statistics" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                   source
                 </a>
               </div>
             )}
             {showBubble2 && (
-              <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
-                 <p className="text-base text-gray-800">
-                    Singapore has one of the lowest five-year survival rates for lung cancer globally !<br/> 
-                    21.9% for males / 37.8% for females
+              <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
+                 <p className="text-base text-gray-800 text-center">
+                    <span className="font-bold text-xl">21.9%</span> for MALES
+                    <br/>
+                    <span className="font-bold text-xl">37.8%</span> for FEMALES
                 </p>
-                 <a href="https://www.nccs.com.sg/news/patient-care/its-not-a-death-sentence-how-mum-of-two-overcomes-stage-4-lung-cancer-and-finds-calling-in-comforting-others" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                 <a href="https://www.nccs.com.sg/news/patient-care/its-not-a-death-sentence-how-mum-of-two-overcomes-stage-4-lung-cancer-and-finds-calling-in-comforting-others" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                 </a>
               </div>
             )}
             {showBubble3 && (
-                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                  <p className="text-base text-gray-800">
                     Lung cancer TNM system :<br/>
                     - Stage III: Locally advanced with lymph node involvement<br/>
                     - Stage IV: Metastatic disease with distant spread
                 </p>
-                 <a href="https://aaro.sg/understanding-lung-cancer-stages-from-diagnosis-to-treatment/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                 <a href="https://aaro.sg/understanding-lung-cancer-stages-from-diagnosis-to-treatment/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                 </a>
               </div>
             )}
              {showBubble4 && (
-                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                  <p className="text-base text-gray-800">
                     5-year survival rates DROP!!<br/>
                     Stage I SCLC: 25-30%<br/>
                     Stage I NSCLC: 70-80%<br/>
                     Advanced stages: Significantly lower survival rates
                 </p>
-                 <a href="https://www.rafflesmedicalgroup.com/health-resources/health-articles/what-you-need-to-know-about-lung-cancer/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                 <a href="https://www.rafflesmedicalgroup.com/health-resources/health-articles/what-you-need-to-know-about-lung-cancer/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                 </a>
               </div>
             )}
             {showBubble5 && (
-                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                  <p className="text-base text-gray-800">
                     Singapore shows a unique pattern for the high rate non-smoker patient
                 </p>
-                 <a href="https://www.singhealth.com.sg/symptoms-treatments/lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                 <a href="https://www.singhealth.com.sg/symptoms-treatments/lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                 </a>
               </div>
             )}
             {showBubble6 && (
-                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                  <p className="text-base text-gray-800">
                     Factors are Air pollution (asbestos, radon, chromates, nickel) and cooking style..etc
                 </p>
-                 <a href="https://www.ntu.edu.sg/news/detail/linking-increasing-air-pollution-to-the-rise-of-a-type-of-lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                 <a href="https://www.ntu.edu.sg/news/detail/linking-increasing-air-pollution-to-the-rise-of-a-type-of-lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                 </a>
               </div>
             )}
             {showBubble7 && (
-                 <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                  <p className="text-base text-gray-800">
                     Radon is a radioactive gas formed naturally by the decay of uranium, thorium, or radium in rocks, soil, and groundwater.
                 </p>
               </div>
             )}
           </div>
-          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-book.gif" alt="Bunny reading a book" className="block w-40 h-auto ml-auto -mt-24 relative" />
+          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-book.gif" alt="Bunny reading a book" className="w-40 h-auto" />
         </div>
       )}
 
       {/* Slide 2 Conversation */}
       {content.id === 2 && (
-        <div className="absolute bottom-20 right-4">
-            <div ref={slide2BubblesRef} className="flex flex-col items-end space-y-2 max-w-xs max-h-[45vh] overflow-y-auto pr-2 pb-8">
+        <div className="absolute bottom-28 left-4 right-4 flex justify-between items-end">
+            <div ref={slide2BubblesRef} className="flex flex-col items-start space-y-2 max-w-xs max-h-[55vh] overflow-y-auto pl-2 pb-8">
               {showSlide2Bubble1 && (
-                <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                   <p className="text-base text-gray-800">
                     Many people often feel anxious about radiation risks and generally lack a clear understanding of the procedure and its safety
                   </p>
-                  <a href="https://www.jneonatalsurg.com/index.php/jns/article/view/7402" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                  <a href="https://www.jneonatalsurg.com/index.php/jns/article/view/7402" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                   </a>
                 </div>
               )}
               {showSlide2Bubble2 && (
-                <div className="bg-gray-200 p-4 rounded-lg rounded-br-none shadow-md">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md">
                   <p className="text-base text-gray-800">
                     NOW - provides detection of many diseases, including cancers, cardiovascular, and neurological disorders, by providing detailed images
                   </p>
-                  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11526153/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-right block mt-2">
+                  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11526153/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                   </a>
                 </div>
               )}
             </div>
-          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-laptop.gif" alt="Bunny with laptop" className="block w-40 h-auto ml-auto -mt-20 relative" />
+          <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-laptop.gif" alt="Bunny with laptop" className="w-40 h-auto" />
         </div>
       )}
     </div>
