@@ -30,9 +30,17 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
   const [showSlide3Bubble5, setShowSlide3Bubble5] = useState(false);
   const [showSlide3Bubble6, setShowSlide3Bubble6] = useState(false);
 
+  // State for Slide 4 bubbles
+  const [showSlide4Bubble1, setShowSlide4Bubble1] = useState(false);
+  const [showSlide4Bubble2, setShowSlide4Bubble2] = useState(false);
+  const [showSlide4Bubble3, setShowSlide4Bubble3] = useState(false);
+  const [showSlide4Bubble4, setShowSlide4Bubble4] = useState(false);
+  const [showSlide4Bubble5, setShowSlide4Bubble5] = useState(false);
+
   const slide1BubblesRef = useRef<HTMLDivElement>(null);
   const slide2BubblesRef = useRef<HTMLDivElement>(null);
   const slide3BubblesRef = useRef<HTMLDivElement>(null);
+  const slide4BubblesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Reset all bubble states on slide change
@@ -54,6 +62,11 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     setShowSlide3Bubble4(false);
     setShowSlide3Bubble5(false);
     setShowSlide3Bubble6(false);
+    setShowSlide4Bubble1(false);
+    setShowSlide4Bubble2(false);
+    setShowSlide4Bubble3(false);
+    setShowSlide4Bubble4(false);
+    setShowSlide4Bubble5(false);
 
     const initialDelay = 500; // ms to wait before the first bubble
     
@@ -109,6 +122,23 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         clearTimeout(timer5);
         clearTimeout(timer6);
       };
+    } else if (content.id === 4) {
+      const interval1 = 3000; // 1st to 2nd
+      const interval2 = 10000; // 2nd to 3rd
+      const interval3 = 8000; // 3rd to 4th
+      const interval4 = 8000; // 4th to 5th
+      const timer1 = setTimeout(() => setShowSlide4Bubble1(true), initialDelay);
+      const timer2 = setTimeout(() => setShowSlide4Bubble2(true), initialDelay + interval1);
+      const timer3 = setTimeout(() => setShowSlide4Bubble3(true), initialDelay + interval1 + interval2);
+      const timer4 = setTimeout(() => setShowSlide4Bubble4(true), initialDelay + interval1 + interval2 + interval3);
+      const timer5 = setTimeout(() => setShowSlide4Bubble5(true), initialDelay + interval1 + interval2 + interval3 + interval4);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+        clearTimeout(timer5);
+      };
     }
   }, [content.id]);
 
@@ -129,6 +159,12 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
       slide3BubblesRef.current.scrollTop = slide3BubblesRef.current.scrollHeight;
     }
   }, [showSlide3Bubble1, showSlide3Bubble2, showSlide3Bubble3, showSlide3Bubble4, showSlide3Bubble5, showSlide3Bubble6]);
+
+  useEffect(() => {
+    if (slide4BubblesRef.current) {
+      slide4BubblesRef.current.scrollTop = slide4BubblesRef.current.scrollHeight;
+    }
+  }, [showSlide4Bubble1, showSlide4Bubble2, showSlide4Bubble3, showSlide4Bubble4, showSlide4Bubble5]);
 
   const renderContent = () => {
     switch (content.type) {
@@ -366,7 +402,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showSlide3Bubble4 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                    Traditional dual planar acquisition is replaced with an ultra-low dose, three-dimensional helical scan - 3D Landmark Scan. 1mm slice width images from this step offer a wealth of anatomical details which AI used to drive Anatomical Landmark Detection ALD for quick, accurate and consistent scan planning.
+                    Traditional dual planar acquisition is replaced with an ultra-low dose, three-dimensional helical scan - 3D Landmark Scan. 1mm slice width images from this step offer a wealth of anatomical details which AI used to drive Anatomical Landmark Detection ALD for quick, a-ccurate and consistent scan planning.
                   </p>
                 </div>
               )}
@@ -390,6 +426,67 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
           </div>
           <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
             <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-xray.gif" alt="Bunny with X-ray" className="w-20 h-auto" />
+          </div>
+        </>
+      )}
+
+      {/* Slide 4 Conversation */}
+      {content.id === 4 && (
+        <>
+          <div 
+            ref={slide4BubblesRef} 
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
+            aria-live="polite"
+          >
+            <div className="flex-grow" />
+            <div className="flex flex-col items-start space-y-2 max-w-xs">
+              {showSlide4Bubble1 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    🐰 Let's have a virtual demo ~
+                  </p>
+                </div>
+              )}
+              {showSlide4Bubble2 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step1.gif" 
+                    alt="Step 1 Demo" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              {showSlide4Bubble3 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step2.gif" 
+                    alt="Step 2 Demo" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              {showSlide4Bubble4 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step3.gif" 
+                    alt="Step 3 Demo" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              {showSlide4Bubble5 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step4.gif" 
+                    alt="Step 4 Demo" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
+            <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-file.gif" alt="Bunny with files for demo" className="w-20 h-auto" />
           </div>
         </>
       )}
