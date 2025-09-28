@@ -450,7 +450,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showSlide4Bubble2 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step1.gif" 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step1.gif" 
                     alt="Step 1 Demo" 
                     className="rounded-md w-full h-auto object-contain"
                   />
@@ -459,7 +459,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showSlide4Bubble3 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step2.gif" 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step2.gif" 
                     alt="Step 2 Demo" 
                     className="rounded-md w-full h-auto object-contain"
                   />
@@ -468,7 +468,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showSlide4Bubble4 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step3.gif" 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step3.gif" 
                     alt="Step 3 Demo" 
                     className="rounded-md w-full h-auto object-contain"
                   />
@@ -477,7 +477,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showSlide4Bubble5 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/canonradbit/refs/heads/main/components/step4.gif" 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step4.gif" 
                     alt="Step 4 Demo" 
                     className="rounded-md w-full h-auto object-contain"
                   />
