@@ -18,9 +18,21 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
   // State for Slide 2 bubbles
   const [showSlide2Bubble1, setShowSlide2Bubble1] = useState(false);
   const [showSlide2Bubble2, setShowSlide2Bubble2] = useState(false);
+  const [showSlide2Bubble3, setShowSlide2Bubble3] = useState(false);
+  const [showSlide2Bubble4, setShowSlide2Bubble4] = useState(false);
+  const [showSlide2Bubble5, setShowSlide2Bubble5] = useState(false);
+  
+  // State for Slide 3 bubbles
+  const [showSlide3Bubble1, setShowSlide3Bubble1] = useState(false);
+  const [showSlide3Bubble2, setShowSlide3Bubble2] = useState(false);
+  const [showSlide3Bubble3, setShowSlide3Bubble3] = useState(false);
+  const [showSlide3Bubble4, setShowSlide3Bubble4] = useState(false);
+  const [showSlide3Bubble5, setShowSlide3Bubble5] = useState(false);
+  const [showSlide3Bubble6, setShowSlide3Bubble6] = useState(false);
 
   const slide1BubblesRef = useRef<HTMLDivElement>(null);
   const slide2BubblesRef = useRef<HTMLDivElement>(null);
+  const slide3BubblesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Reset all bubble states on slide change
@@ -33,11 +45,21 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     setShowBubble7(false);
     setShowSlide2Bubble1(false);
     setShowSlide2Bubble2(false);
+    setShowSlide2Bubble3(false);
+    setShowSlide2Bubble4(false);
+    setShowSlide2Bubble5(false);
+    setShowSlide3Bubble1(false);
+    setShowSlide3Bubble2(false);
+    setShowSlide3Bubble3(false);
+    setShowSlide3Bubble4(false);
+    setShowSlide3Bubble5(false);
+    setShowSlide3Bubble6(false);
 
     const initialDelay = 500; // ms to wait before the first bubble
-    const interval = 5000; // 5 seconds between bubbles
+    
 
     if (content.id === 1) {
+      const interval = 5000; // 5 seconds between bubbles
       const timer1 = setTimeout(() => setShowBubble1(true), initialDelay);
       const timer2 = setTimeout(() => setShowBubble2(true), initialDelay + interval * 1);
       const timer3 = setTimeout(() => setShowBubble3(true), initialDelay + interval * 2);
@@ -56,11 +78,36 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         clearTimeout(timer7);
       };
     } else if (content.id === 2) {
+      const interval = 5000; // 5 seconds between bubbles
       const timer1 = setTimeout(() => setShowSlide2Bubble1(true), initialDelay);
       const timer2 = setTimeout(() => setShowSlide2Bubble2(true), initialDelay + interval * 1);
+      const timer3 = setTimeout(() => setShowSlide2Bubble3(true), initialDelay + interval * 2);
+      const timer4 = setTimeout(() => setShowSlide2Bubble4(true), initialDelay + interval * 3);
+      const timer5 = setTimeout(() => setShowSlide2Bubble5(true), initialDelay + interval * 4);
        return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+        clearTimeout(timer5);
+      };
+    } else if (content.id === 3) {
+      const firstInterval = 3000; // 3 seconds
+      const subsequentInterval = 10000; // 10 seconds
+
+      const timer1 = setTimeout(() => setShowSlide3Bubble1(true), initialDelay);
+      const timer2 = setTimeout(() => setShowSlide3Bubble2(true), initialDelay + firstInterval);
+      const timer3 = setTimeout(() => setShowSlide3Bubble3(true), initialDelay + firstInterval + subsequentInterval);
+      const timer4 = setTimeout(() => setShowSlide3Bubble4(true), initialDelay + firstInterval + subsequentInterval * 2);
+      const timer5 = setTimeout(() => setShowSlide3Bubble5(true), initialDelay + firstInterval + subsequentInterval * 3);
+      const timer6 = setTimeout(() => setShowSlide3Bubble6(true), initialDelay + firstInterval + subsequentInterval * 4);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+        clearTimeout(timer5);
+        clearTimeout(timer6);
       };
     }
   }, [content.id]);
@@ -75,7 +122,13 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     if (slide2BubblesRef.current) {
       slide2BubblesRef.current.scrollTop = slide2BubblesRef.current.scrollHeight;
     }
-  }, [showSlide2Bubble1, showSlide2Bubble2]);
+  }, [showSlide2Bubble1, showSlide2Bubble2, showSlide2Bubble3, showSlide2Bubble4, showSlide2Bubble5]);
+
+  useEffect(() => {
+    if (slide3BubblesRef.current) {
+      slide3BubblesRef.current.scrollTop = slide3BubblesRef.current.scrollHeight;
+    }
+  }, [showSlide3Bubble1, showSlide3Bubble2, showSlide3Bubble3, showSlide3Bubble4, showSlide3Bubble5, showSlide3Bubble6]);
 
   const renderContent = () => {
     switch (content.type) {
@@ -141,15 +194,16 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         <>
           <div 
             ref={slide1BubblesRef} 
-            className="absolute top-0 left-0 right-0 bottom-28 overflow-y-auto px-4 pt-4 pb-20 z-10 flex flex-col justify-end"
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
             aria-live="polite"
           >
+            <div className="flex-grow" />
             <div className="flex flex-col items-start space-y-2 max-w-xs">
               {showBubble1 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                    "5,759 cases in males"<br/>
-                    "3,534 cases in females"
+                    "<span className="font-bold text-2xl">5,759</span> cases in MALES"<br/>
+                    "<span className="font-bold text-2xl">3,534</span> cases in FEMALES"
                   </p>
                   <a href="https://www.nccs.com.sg/your-care/about-cancer/cancer-statistics" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
@@ -159,9 +213,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showBubble2 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800 text-center">
-                      <span className="font-bold text-xl">21.9%</span> for MALES
-                      <br/>
-                      <span className="font-bold text-xl">37.8%</span> for FEMALES
+                      <span className="font-bold text-xl">18-22%</span> 5-year survival rate in SG
                   </p>
                   <a href="https://www.nccs.com.sg/news/patient-care/its-not-a-death-sentence-how-mum-of-two-overcomes-stage-4-lung-cancer-and-finds-calling-in-comforting-others" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                       source
@@ -171,9 +223,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showBubble3 && (
                   <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                      Lung cancer TNM system :<br/>
-                      - Stage III: Locally advanced with lymph node involvement<br/>
-                      - Stage IV: Metastatic disease with distant spread
+                      5-year survival rate by stages :<br/>
+                      - Stage III: <span className="font-bold text-2xl">15-35% ‼️</span><br/>
+                      - Stage IV: <span className="font-bold text-2xl">5% ‼️</span>
                   </p>
                   <a href="https://aaro.sg/understanding-lung-cancer-stages-from-diagnosis-to-treatment/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                       source
@@ -183,41 +235,31 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
               {showBubble4 && (
                   <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                      5-year survival rates DROP!!<br/>
-                      Stage I SCLC: 25-30%<br/>
-                      Stage I NSCLC: 70-80%<br/>
-                      Advanced stages: Significantly lower survival rates
+                      LDCT Lung Screening is recommended by public health programs in many countries 🌏 for EARLY DETECTION:<br/>
+                      <span className="flex items-center">JAPAN <a href="https://www.mhlw.go.jp/topics/2003/05/dl/tp0530-3c1.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
+                      <span className="flex items-center">TAIWAN <a href="https://www.hpa.gov.tw/File/Attach/16010/File_22158.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
+                      <span className="flex items-center">CHINA <a href="https://www.nhc.gov.cn/yzygj/c100068/202204/0c1f7d3aca0545abbeb02030ce255930/files/1732863054387_68585.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
+                      <span className="flex items-center">U.S <a href="https://www.cdc.gov/lung-cancer/screening/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
+                      <span className="flex items-center">E.U <a href="https://health.ec.europa.eu/non-communicable-diseases/cancer/europes-beating-cancer-plan-eu4health-financed-projects/projects/solace_en#:~:text=Screening%20using%20low%2Ddose%20computed,mortality%20by%20at%20least%2020" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
                   </p>
-                  <a href="https://www.rafflesmedicalgroup.com/health-resources/health-articles/what-you-need-to-know-about-lung-cancer/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
-                      source
-                  </a>
                 </div>
               )}
               {showBubble5 && (
                   <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                      Singapore shows a unique pattern for the high rate non-smoker patient
+                      ❓The answer is SMOKING.<br/>
+                      👋🏻Longterm data of vaping is lacking, thus Lung Screening is especially valuable for those with a history of vaping. <br/> 
                   </p>
-                  <a href="https://www.singhealth.com.sg/symptoms-treatments/lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
-                      source
-                  </a>
                 </div>
               )}
               {showBubble6 && (
                   <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                      Factors are Air pollution (asbestos, radon, chromates, nickel) and cooking style..etc
+                      No it's not a typo. Data shows nearly half of lung cancer patients are non-smoker !
                   </p>
-                  <a href="https://www.ntu.edu.sg/news/detail/linking-increasing-air-pollution-to-the-rise-of-a-type-of-lung-cancer" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                  <a href="http://www.smj.org.sg/sites/default/files/OA-2021-032-epub.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                       source
                   </a>
-                </div>
-              )}
-              {showBubble7 && (
-                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
-                  <p className="text-base text-gray-800">
-                      Radon is a radioactive gas formed naturally by the decay of uranium, thorium, or radium in rocks, soil, and groundwater.
-                  </p>
                 </div>
               )}
             </div>
@@ -233,34 +275,121 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         <>
           <div 
             ref={slide2BubblesRef} 
-            className="absolute top-0 left-0 right-0 bottom-28 overflow-y-auto px-4 pt-4 pb-20 z-10 flex flex-col justify-end"
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
             aria-live="polite"
           >
+            <div className="flex-grow" />
             <div className="flex flex-col items-start space-y-2 max-w-xs">
               {showSlide2Bubble1 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                    Many people often feel anxious about radiation risks and generally lack a clear understanding of the procedure and its safety
+                    The number is a cold fact. Finding out other causes is important.🧐
                   </p>
-                  <a href="https://www.jneonatalsurg.com/index.php/jns/article/view/7402" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
-                    source
-                  </a>
                 </div>
               )}
               {showSlide2Bubble2 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
                   <p className="text-base text-gray-800">
-                    NOW - provides detection of many diseases, including cancers, cardiovascular, and neurological disorders, by providing detailed images
+                    🍳Several toxic agents, including some accepted or suspected carcinogens, have been detected in the emissions of the heated cooking oils. Chinese-style cooking is indeed a cause of lung cancer.
                   </p>
-                  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11526153/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                  <a href="https://www.sjweh.fi/show_abstract.php?abstract_id=440" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
                     source
                   </a>
+                </div>
+              )}
+              {showSlide2Bubble3 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    👷🏻‍♂️Welding fumes contain carcinogens like fluorides, metallic oxides, and silicates. Meanwhile, benzene is a natural part of mixtures such as crude oil and gasoline, which are commonly found in the oil and gas industry.
+                  </p>
+                  <a href="https://radiotherapysingapore.com/top-5-lung-cancer-causes-in-non-smokers/" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                    source
+                  </a>
+                </div>
+              )}
+              {showSlide2Bubble4 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    🏕️Radioactive gas that comes from natural uranium decay in soil and seeps into homes through foundation cracks. Though it's uncommon in SG, it's still one of the major risk factor.
+                  </p>
+                  <a href="https://www.epa.gov/radon/health-risk-radon" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                    source
+                  </a>
+                </div>
+              )}
+              {showSlide2Bubble5 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    CT scan technology has advanced rapidly in recent years, evolving from mainly diagnosing illness to playing a vital role in <span className="font-bold">early detection</span> and prevention.
+                  </p>
                 </div>
               )}
             </div>
           </div>
           <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
             <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-laptop.gif" alt="Bunny with laptop" className="w-20 h-auto" />
+          </div>
+        </>
+      )}
+
+      {/* Slide 3 Conversation */}
+      {content.id === 3 && (
+        <>
+          <div 
+            ref={slide3BubblesRef} 
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
+            aria-live="polite"
+          >
+            <div className="flex-grow" />
+            <div className="flex flex-col items-start space-y-2 max-w-xs">
+              {showSlide3Bubble1 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    OK, now let's explore how CANON excels 🚀
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble2 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    Dual camera system detects patient features and spatial orientation for automatic couch height, lateral and longitudinal position adjustment. Two environment data ensure accurate positioning avoid common errors such as inaccurate depth calculation due to room lighting differences for ceiling mounted single camera.
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble3 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    Canon's SilverBeam energy-shaping filter removes low energy photons from X-ray beam, those photons are useless in forming diagnostic images. By doing so, radiation dose delivered to the patient can be significantly reduced.
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble4 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    Traditional dual planar acquisition is replaced with an ultra-low dose, three-dimensional helical scan - 3D Landmark Scan. 1mm slice width images from this step offer a wealth of anatomical details which AI used to drive Anatomical Landmark Detection ALD for quick, accurate and consistent scan planning.
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble5 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    Based on user feedback survey, the INSTINX UX user-interface eliminated unnecessary redundancies / information, its new design uses recognizable icons placed in intuitive locations on the screen, consistent terminology, clear visual flow from the start to the end of the scan. And more visual elements such as flow progression, functions badges etc. <br/>
+                    FOCUS ON THE SCAN !<br/> 
+                    DISTRACTIONS GO AWAY !
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble6 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <p className="text-base text-gray-800">
+                    AiCE DLR was trained from wide range of data, thousands of phantom and patient images were examined by medical physicists and radiologists for the development. Its algorithm generates high quality images from low quality images while preserving signal and spatial resolution across the clinical spectrum, providing improvements in noise, low contrast detectability, and spatial resolution preservation. Making ULTRA-HIGH RESOLUTION CT at standard dose. 💯
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
+            <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-xray.gif" alt="Bunny with X-ray" className="w-20 h-auto" />
           </div>
         </>
       )}

@@ -15,14 +15,9 @@ export const SLIDES_DATA: SlideContent[] = [
   },
   {
     id: 3,
-    type: 'bullet_points',
-    title: 'Key Takeaways',
-    points: [
-      'Simplicity is key to clarity.',
-      'Mobile-first design is essential.',
-      'React & Tailwind are a powerful combo.',
-      'Engage your audience effectively.'
-    ],
+    type: 'title',
+    title: '',
+    text: '',
   },
   {
     id: 4,
