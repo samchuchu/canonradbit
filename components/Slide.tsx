@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SlideContent } from '../types';
+import ImageReveal from './ImageReveal';
+import GifPlayer from './GifPlayer';
 
 interface SlideProps {
   content: SlideContent;
@@ -36,6 +38,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
   const [showSlide4Bubble3, setShowSlide4Bubble3] = useState(false);
   const [showSlide4Bubble4, setShowSlide4Bubble4] = useState(false);
   const [showSlide4Bubble5, setShowSlide4Bubble5] = useState(false);
+  const [showSlide4Bubble6, setShowSlide4Bubble6] = useState(false);
+  const [showSlide4Bubble7, setShowSlide4Bubble7] = useState(false);
+  const [showSlide4Bubble8, setShowSlide4Bubble8] = useState(false);
 
   const slide1BubblesRef = useRef<HTMLDivElement>(null);
   const slide2BubblesRef = useRef<HTMLDivElement>(null);
@@ -67,6 +72,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     setShowSlide4Bubble3(false);
     setShowSlide4Bubble4(false);
     setShowSlide4Bubble5(false);
+    setShowSlide4Bubble6(false);
+    setShowSlide4Bubble7(false);
+    setShowSlide4Bubble8(false);
 
     const initialDelay = 500; // ms to wait before the first bubble
     
@@ -124,20 +132,39 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
       };
     } else if (content.id === 4) {
       const interval1 = 3000; // 1st to 2nd
-      const interval2 = 10000; // 2nd to 3rd
-      const interval3 = 8000; // 3rd to 4th
-      const interval4 = 8000; // 4th to 5th
-      const timer1 = setTimeout(() => setShowSlide4Bubble1(true), initialDelay);
-      const timer2 = setTimeout(() => setShowSlide4Bubble2(true), initialDelay + interval1);
-      const timer3 = setTimeout(() => setShowSlide4Bubble3(true), initialDelay + interval1 + interval2);
-      const timer4 = setTimeout(() => setShowSlide4Bubble4(true), initialDelay + interval1 + interval2 + interval3);
-      const timer5 = setTimeout(() => setShowSlide4Bubble5(true), initialDelay + interval1 + interval2 + interval3 + interval4);
+      const interval2 = 10000; // 2nd to 3rd, 3rd to 4th, 4th to 5th
+      const interval_5_to_6 = 9000;
+      const interval_6_to_7 = 18000;
+      const interval_7_to_8 = 2000;
+
+      const timeB1 = initialDelay;
+      const timeB2 = timeB1 + interval1;
+      const timeB3 = timeB2 + interval2;
+      const timeB4 = timeB3 + interval2;
+      const timeB5 = timeB4 + interval2;
+      const timeB6 = timeB5 + interval_5_to_6;
+      const timeB7 = timeB6 + interval_6_to_7;
+      const timeB8 = timeB7 + interval_7_to_8;
+
+
+      const timer1 = setTimeout(() => setShowSlide4Bubble1(true), timeB1);
+      const timer2 = setTimeout(() => setShowSlide4Bubble2(true), timeB2);
+      const timer3 = setTimeout(() => setShowSlide4Bubble3(true), timeB3);
+      const timer4 = setTimeout(() => setShowSlide4Bubble4(true), timeB4);
+      const timer5 = setTimeout(() => setShowSlide4Bubble5(true), timeB5);
+      const timer6 = setTimeout(() => setShowSlide4Bubble6(true), timeB6);
+      const timer7 = setTimeout(() => setShowSlide4Bubble7(true), timeB7);
+      const timer8 = setTimeout(() => setShowSlide4Bubble8(true), timeB8);
+      
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
         clearTimeout(timer4);
         clearTimeout(timer5);
+        clearTimeout(timer6);
+        clearTimeout(timer7);
+        clearTimeout(timer8);
       };
     }
   }, [content.id]);
@@ -164,7 +191,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     if (slide4BubblesRef.current) {
       slide4BubblesRef.current.scrollTop = slide4BubblesRef.current.scrollHeight;
     }
-  }, [showSlide4Bubble1, showSlide4Bubble2, showSlide4Bubble3, showSlide4Bubble4, showSlide4Bubble5]);
+  }, [showSlide4Bubble1, showSlide4Bubble2, showSlide4Bubble3, showSlide4Bubble4, showSlide4Bubble5, showSlide4Bubble6, showSlide4Bubble7, showSlide4Bubble8]);
 
   const renderContent = () => {
     switch (content.type) {
@@ -234,9 +261,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start space-y-2 max-w-xs">
+            <div className="flex flex-col items-start space-y-2">
               {showBubble1 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     "<span className="font-bold text-2xl">5,759</span> cases in MALES"<br/>
                     "<span className="font-bold text-2xl">3,534</span> cases in FEMALES"
@@ -247,7 +274,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showBubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800 text-center">
                       <span className="font-bold text-xl">18-22%</span> 5-year survival rate in SG
                   </p>
@@ -257,7 +284,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showBubble3 && (
-                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                       5-year survival rate by stages :<br/>
                       - Stage III: <span className="font-bold text-2xl">15-35% ‼️</span><br/>
@@ -269,7 +296,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showBubble4 && (
-                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                       LDCT Lung Screening is recommended by public health programs in many countries 🌏 for EARLY DETECTION:<br/>
                       <span className="flex items-center">JAPAN <a href="https://www.mhlw.go.jp/topics/2003/05/dl/tp0530-3c1.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline ml-2">source</a></span>
@@ -281,7 +308,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showBubble5 && (
-                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                       ❓The answer is SMOKING.<br/>
                       👋🏻Longterm data of vaping is lacking, thus Lung Screening is especially valuable for those with a history of vaping. <br/> 
@@ -289,7 +316,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showBubble6 && (
-                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                  <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                       No it's not a typo. Data shows nearly half of lung cancer patients are non-smoker !
                   </p>
@@ -315,16 +342,16 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start space-y-2 max-w-xs">
+            <div className="flex flex-col items-start space-y-2">
               {showSlide2Bubble1 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     The number is a cold fact. Finding out other causes is important.🧐
                   </p>
                 </div>
               )}
               {showSlide2Bubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     🍳Several toxic agents, including some accepted or suspected carcinogens, have been detected in the emissions of the heated cooking oils. Chinese-style cooking is indeed a cause of lung cancer.
                   </p>
@@ -334,7 +361,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide2Bubble3 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     👷🏻‍♂️Welding fumes contain carcinogens like fluorides, metallic oxides, and silicates. Meanwhile, benzene is a natural part of mixtures such as crude oil and gasoline, which are commonly found in the oil and gas industry.
                   </p>
@@ -344,7 +371,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide2Bubble4 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     🏕️Radioactive gas that comes from natural uranium decay in soil and seeps into homes through foundation cracks. Though it's uncommon in SG, it's still one of the major risk factor.
                   </p>
@@ -354,7 +381,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide2Bubble5 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     CT scan technology has advanced rapidly in recent years, evolving from mainly diagnosing illness to playing a vital role in <span className="font-bold">early detection</span> and prevention.
                   </p>
@@ -377,37 +404,37 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start space-y-2 max-w-xs">
+            <div className="flex flex-col items-start space-y-2">
               {showSlide3Bubble1 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     OK, now let's explore how CANON excels 🚀
                   </p>
                 </div>
               )}
               {showSlide3Bubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     Dual camera system detects patient features and spatial orientation for automatic couch height, lateral and longitudinal position adjustment. Two environment data ensure accurate positioning avoid common errors such as inaccurate depth calculation due to room lighting differences for ceiling mounted single camera.
                   </p>
                 </div>
               )}
               {showSlide3Bubble3 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     Canon's SilverBeam energy-shaping filter removes low energy photons from X-ray beam, those photons are useless in forming diagnostic images. By doing so, radiation dose delivered to the patient can be significantly reduced.
                   </p>
                 </div>
               )}
               {showSlide3Bubble4 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     Traditional dual planar acquisition is replaced with an ultra-low dose, three-dimensional helical scan - 3D Landmark Scan. 1mm slice width images from this step offer a wealth of anatomical details which AI used to drive Anatomical Landmark Detection ALD for quick, a-ccurate and consistent scan planning.
                   </p>
                 </div>
               )}
               {showSlide3Bubble5 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     Based on user feedback survey, the INSTINX UX user-interface eliminated unnecessary redundancies / information, its new design uses recognizable icons placed in intuitive locations on the screen, consistent terminology, clear visual flow from the start to the end of the scan. And more visual elements such as flow progression, functions badges etc. <br/>
                     FOCUS ON THE SCAN !<br/> 
@@ -416,9 +443,16 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide3Bubble6 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     AiCE DLR was trained from wide range of data, thousands of phantom and patient images were examined by medical physicists and radiologists for the development. Its algorithm generates high quality images from low quality images while preserving signal and spatial resolution across the clinical spectrum, providing improvements in noise, low contrast detectability, and spatial resolution preservation. Making ULTRA-HIGH RESOLUTION CT at standard dose. 💯
+                  </p>
+                </div>
+              )}
+              {showSlide3Bubble6 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                  <p className="text-base text-gray-800">
+                    🥱 I know 😴 Press next, it'll be easier to watch. I promise.
                   </p>
                 </div>
               )}
@@ -439,16 +473,16 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start space-y-2 max-w-xs">
+            <div className="flex flex-col items-start space-y-2">
               {showSlide4Bubble1 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     🐰 Let's have a virtual demo ~
                   </p>
                 </div>
               )}
               {showSlide4Bubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
                     src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step1.gif" 
                     alt="Step 1 Demo" 
@@ -457,28 +491,57 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble3 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
-                  <img 
-                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step2.gif" 
-                    alt="Step 2 Demo" 
-                    className="rounded-md w-full h-auto object-contain"
-                  />
+                <div className="animate-slide-up-fade-in w-full max-w-xs">
+                    <GifPlayer 
+                        gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step2.gif"
+                        duration={5400}
+                        startButtonText="START SCAN"
+                        scanAgainButtonText="SCAN AGAIN"
+                        instructions={`Click "START SCAN" for ultra-low dose 3D helical scan. This demonstration is for illustrative purposes only. For actual operations, please consult the Canon Medical Systems documentation.`}
+                    />
                 </div>
               )}
               {showSlide4Bubble4 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+                 <div className="animate-slide-up-fade-in w-full max-w-xs">
+                    <GifPlayer 
+                        gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step3.gif"
+                        duration={6600}
+                        startButtonText="PLAN SCAN"
+                        scanAgainButtonText="PLAN AGAIN"
+                        instructions={`Click "PLAN SCAN" for auto scan planning by AiCE using ALD. This demonstration is for illustrative purposes only. For actual operations, please consult the Canon Medical Systems documentation.`}
+                    />
+                </div>
+              )}
+              {showSlide4Bubble5 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step3.gif" 
-                    alt="Step 3 Demo" 
+                    src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam1.gif?t=${new Date().getTime()}`} 
+                    alt="SilverBeam filter animation" 
                     className="rounded-md w-full h-auto object-contain"
                   />
                 </div>
               )}
-              {showSlide4Bubble5 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in">
+              {showSlide4Bubble6 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
-                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step4.gif" 
-                    alt="Step 4 Demo" 
+                    src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam2.gif?t=${new Date().getTime()}`} 
+                    alt="SilverBeam filter animation part 2" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              {showSlide4Bubble7 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                  <p className="text-base text-gray-800">
+                    So SilverBeam filter is like safety gates, only useful photons are allowed to pass !
+                  </p>
+                </div>
+              )}
+              {showSlide4Bubble8 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/filterbunny.gif" 
+                    alt="Bunny with filter" 
                     className="rounded-md w-full h-auto object-contain"
                   />
                 </div>
