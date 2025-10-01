@@ -13,6 +13,7 @@ const App: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [view, setView] = useState<View>('slides');
+  const [isChatbotLoading, setIsChatbotLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,6 +45,14 @@ const App: React.FC = () => {
     }
   };
 
+  const handleChatbotClick = () => {
+    setIsChatbotLoading(true);
+    setTimeout(() => {
+      setView('chatbot');
+      setIsChatbotLoading(false);
+    }, 1500);
+  };
+
   const slideContainerClass = `absolute inset-0 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`;
 
   return (
@@ -56,6 +65,15 @@ const App: React.FC = () => {
           backgroundPosition: 'center',
         }}
       >
+        <style>{`
+            @keyframes chatbot-loading-fade {
+              0%, 100% { opacity: 0; }
+              20%, 80% { opacity: 1; }
+            }
+            .animate-chatbot-loading {
+              animation: chatbot-loading-fade 1.5s ease-in-out forwards;
+            }
+        `}</style>
         {isLoading ? (
           <LoadingScreen />
         ) : (
@@ -71,13 +89,23 @@ const App: React.FC = () => {
                 <Navigation
                   onPrev={handlePrev}
                   onNext={handleNext}
-                  onChatbotClick={() => setView('chatbot')}
+                  onChatbotClick={handleChatbotClick}
                   currentSlide={currentSlide}
                   totalSlides={SLIDES_DATA.length}
                 />
               </>
             )}
             {view === 'chatbot' && <Chatbot onBack={() => setView('slides')} />}
+
+            {isChatbotLoading && (
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center animate-chatbot-loading">
+                  <img 
+                      src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Boxes%20Icons/ctroom01-removebg.png" 
+                      alt="Loading RADbot..." 
+                      className="w-4/5 h-auto opacity-50"
+                  />
+              </div>
+            )}
           </>
         )}
       </div>

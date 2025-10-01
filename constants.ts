@@ -28,7 +28,13 @@ export const SLIDES_DATA: SlideContent[] = [
   {
     id: 5,
     type: 'title',
-    title: 'Thank You',
-    text: 'Questions & Answers',
+    title: '',
+    text: '',
+  },
+  {
+    id: 6,
+    type: 'title',
+    title: '',
+    text: '',
   },
 ];

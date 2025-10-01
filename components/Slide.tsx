@@ -41,11 +41,17 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
   const [showSlide4Bubble6, setShowSlide4Bubble6] = useState(false);
   const [showSlide4Bubble7, setShowSlide4Bubble7] = useState(false);
   const [showSlide4Bubble8, setShowSlide4Bubble8] = useState(false);
+  const [showSlide4Bubble9, setShowSlide4Bubble9] = useState(false);
+
+  // State for Slide 5 bubbles
+  const [showSlide5Bubble1, setShowSlide5Bubble1] = useState(false);
+  const [showSlide5Bubble2, setShowSlide5Bubble2] = useState(false);
 
   const slide1BubblesRef = useRef<HTMLDivElement>(null);
   const slide2BubblesRef = useRef<HTMLDivElement>(null);
   const slide3BubblesRef = useRef<HTMLDivElement>(null);
   const slide4BubblesRef = useRef<HTMLDivElement>(null);
+  const slide5BubblesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Reset all bubble states on slide change
@@ -75,6 +81,9 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     setShowSlide4Bubble6(false);
     setShowSlide4Bubble7(false);
     setShowSlide4Bubble8(false);
+    setShowSlide4Bubble9(false);
+    setShowSlide5Bubble1(false);
+    setShowSlide5Bubble2(false);
 
     const initialDelay = 500; // ms to wait before the first bubble
     
@@ -136,6 +145,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
       const interval_5_to_6 = 9000;
       const interval_6_to_7 = 18000;
       const interval_7_to_8 = 2000;
+      const interval_8_to_9 = 10000;
 
       const timeB1 = initialDelay;
       const timeB2 = timeB1 + interval1;
@@ -145,6 +155,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
       const timeB6 = timeB5 + interval_5_to_6;
       const timeB7 = timeB6 + interval_6_to_7;
       const timeB8 = timeB7 + interval_7_to_8;
+      const timeB9 = timeB8 + interval_8_to_9;
 
 
       const timer1 = setTimeout(() => setShowSlide4Bubble1(true), timeB1);
@@ -155,6 +166,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
       const timer6 = setTimeout(() => setShowSlide4Bubble6(true), timeB6);
       const timer7 = setTimeout(() => setShowSlide4Bubble7(true), timeB7);
       const timer8 = setTimeout(() => setShowSlide4Bubble8(true), timeB8);
+      const timer9 = setTimeout(() => setShowSlide4Bubble9(true), timeB9);
       
       return () => {
         clearTimeout(timer1);
@@ -165,6 +177,15 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         clearTimeout(timer6);
         clearTimeout(timer7);
         clearTimeout(timer8);
+        clearTimeout(timer9);
+      };
+    } else if (content.id === 5) {
+      const timer1 = setTimeout(() => setShowSlide5Bubble1(true), initialDelay);
+      const timer2 = setTimeout(() => setShowSlide5Bubble2(true), initialDelay + 5000);
+      
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
       };
     }
   }, [content.id]);
@@ -191,9 +212,28 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
     if (slide4BubblesRef.current) {
       slide4BubblesRef.current.scrollTop = slide4BubblesRef.current.scrollHeight;
     }
-  }, [showSlide4Bubble1, showSlide4Bubble2, showSlide4Bubble3, showSlide4Bubble4, showSlide4Bubble5, showSlide4Bubble6, showSlide4Bubble7, showSlide4Bubble8]);
+  }, [showSlide4Bubble1, showSlide4Bubble2, showSlide4Bubble3, showSlide4Bubble4, showSlide4Bubble5, showSlide4Bubble6, showSlide4Bubble7, showSlide4Bubble8, showSlide4Bubble9]);
+  
+  useEffect(() => {
+    if (slide5BubblesRef.current) {
+      slide5BubblesRef.current.scrollTop = slide5BubblesRef.current.scrollHeight;
+    }
+  }, [showSlide5Bubble1, showSlide5Bubble2]);
+
 
   const renderContent = () => {
+    if (content.id === 6) {
+      return (
+        <div className="h-full w-full bg-black">
+          <img 
+            src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/dreamsamphone.gif" 
+            alt="Thank You Animation"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      );
+    }
+
     switch (content.type) {
       case 'title':
         return (
@@ -473,7 +513,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start space-y-2">
+            <div className="flex flex-col items-start">
               {showSlide4Bubble1 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
@@ -482,7 +522,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-4">
                   <img 
                     src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step1.gif" 
                     alt="Step 1 Demo" 
@@ -491,7 +531,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble3 && (
-                <div className="animate-slide-up-fade-in w-full max-w-xs">
+                <div className="animate-slide-up-fade-in w-full max-w-xs mt-[150px]">
                     <GifPlayer 
                         gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step2.gif"
                         duration={5400}
@@ -502,7 +542,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble4 && (
-                 <div className="animate-slide-up-fade-in w-full max-w-xs">
+                 <div className="animate-slide-up-fade-in w-full max-w-xs mt-[150px]">
                     <GifPlayer 
                         gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step3.gif"
                         duration={6600}
@@ -513,7 +553,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble5 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
                   <img 
                     src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam1.gif?t=${new Date().getTime()}`} 
                     alt="SilverBeam filter animation" 
@@ -522,7 +562,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble6 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
                   <img 
                     src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam2.gif?t=${new Date().getTime()}`} 
                     alt="SilverBeam filter animation part 2" 
@@ -531,17 +571,29 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble7 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
                   <p className="text-base text-gray-800">
                     So SilverBeam filter is like safety gates, only useful photons are allowed to pass !
                   </p>
                 </div>
               )}
               {showSlide4Bubble8 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
                   <img 
                     src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/filterbunny.gif" 
                     alt="Bunny with filter" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                </div>
+              )}
+              {showSlide4Bubble9 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                  <p className="text-base text-gray-800 mb-2">
+                    Advanced intelligent Clear-IQ Engine (AiCE) uses Deep Learning innovation to match the spatial resolution and low-noise properties of advanced model-based iterative reconstructions to produce high quality images without compromising on speed or dose.
+                  </p>
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step4.gif" 
+                    alt="Step 4 Demo AiCE" 
                     className="rounded-md w-full h-auto object-contain"
                   />
                 </div>
@@ -550,6 +602,48 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
           </div>
           <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
             <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-file.gif" alt="Bunny with files for demo" className="w-20 h-auto" />
+          </div>
+        </>
+      )}
+
+      {/* Slide 5 Conversation */}
+      {content.id === 5 && (
+        <>
+          <div 
+            ref={slide5BubblesRef} 
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
+            aria-live="polite"
+          >
+            <div className="flex-grow" />
+            <div className="flex flex-col items-start space-y-2">
+              {showSlide5Bubble1 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/51.png" 
+                    alt="Clinical images comparison of AiCE and standard reconstruction" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                  <a href="https://cf-store.widencdn.net/canonmedical/6/b/7/6b7815ea-dd91-4430-96ed-590b8ae4a84a.pdf?response-content-disposition=inline%3B%20filename%3D%22MCSCT0005EA_fin.pdf%22&response-content-type=application%2Fpdf&Expires=1759296569&Signature=AgtBRClR0cYfiPIDCeNzdBDNoJkzW24zwzZtoD4T5FXXqvQ-BdffX-bivOMuhBrV8IIqf7Pa7CB3iP7Byk8LOwt6eZ5d0VGi4eOjVTQfXWr71HP1Grv~diYNqfBOor0X1ZiqJ68R0NA9tPSD2DU7IR56iMuRpVK0uox25fVz9j~PbScYY-TZa6okAXY9SuYg-O58PXyy-jw8Q4uQNvgng16hj7KtZBK25boOmdT9KZOtC7VLSkyYP-dCEMTzqd4JJPr-t~m0Wp40uDtx8~-C3ODeajuuvN5NsbuT7BDqSI1NSdw6W6K2JmHR0yMYNQ9N3aYzBmrAJttPAyiZ8b0U~Q__&Key-Pair-Id=APKAJD5XONOBVWWOA65A" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                    source
+                  </a>
+                </div>
+              )}
+              {showSlide5Bubble2 && (
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
+                  <img 
+                    src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/52.png" 
+                    alt="Second clinical images comparison of AiCE and standard reconstruction" 
+                    className="rounded-md w-full h-auto object-contain"
+                  />
+                  <a href="https://cf-store.widencdn.net/canonmedical/6/b/7/6b7815ea-dd91-4430-96ed-590b8ae4a84a.pdf?response-content-disposition=inline%3B%20filename%3D%22MCSCT0005EA_fin.pdf%22&response-content-type=application%2Fpdf&Expires=1759296569&Signature=AgtBRClR0cYfiPIDCeNzdBDNoJkzW24zwzZtoD4T5FXXqvQ-BdffX-bivOMuhBrV8IIqf7Pa7CB3iP7Byk8LOwt6eZ5d0VGi4eOjVTQfXWr71HP1Grv~diYNqfBOor0X1ZiqJ68R0NA9tPSD2DU7IR56iMuRpVK0uox25fVz9j~PbScYY-TZa6okAXY9SuYg-O58PXyy-jw8Q4uQNvgng16hj7KtZBK25boOmdT9KZOtC7VLSkyYP-dCEMTzqd4JJPr-t~m0Wp40uDtx8~-C3ODeajuuvN5NsbuT7BDqSI1NSdw6W6K2JmHR0yMYNQ9N3aYzBmrAJttPAyiZ8b0U~Q__&Key-Pair-Id=APKAJD5XONOBVWWOA65A" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline text-left block mt-2">
+                    source
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="absolute bottom-28 right-4 z-20 pointer-events-none">
+            <img src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/bunny-xray.gif" alt="Bunny with X-ray" className="w-20 h-auto" />
           </div>
         </>
       )}

@@ -24,7 +24,8 @@ const SendIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
   const [messages, setMessages] = useState<Message[]>([
-    { sender: 'bot', text: "Hello! I'm RADbot. Ask me anything about the documents provided by the admin." }
+    { sender: 'bot', text: "Hihi RADbot here ~ Do you want to know more about today's LDCT Chest ? Just let me know okway ~~" },
+    { sender: 'bot', text: "Sorry, the server is only accessible during presentation. Talk to you next time !" }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
     setInputValue('');
     setIsLoading(true);
 
-    const webhookUrl = 'http://localhost:5678/form/82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d';
+    const webhookUrl = 'http://chuchun8n.duckdns.org:5678/webhook-test/49759958-3d12-4dfe-b1dc-47726130bdbf';
     const formData = new FormData();
     // The key 'question' should match what your n8n workflow expects.
     formData.append('question', trimmedInput);
@@ -102,29 +103,51 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
         <button onClick={onBack} className="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Back to Slides">
           <ArrowLeftIcon className="h-6 w-6 text-gray-700" />
         </button>
-        <h2 className="font-bold text-lg text-gray-800">RADbot Assistant</h2>
+        <img 
+            src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/RADbot-full.png" 
+            alt="RADbot Logo" 
+            className="h-10 w-auto" 
+        />
         <div className="w-8"></div> {/* Spacer */}
       </header>
 
       {/* Message Area */}
       <main ref={chatContainerRef} className="flex-grow p-4 overflow-y-auto space-y-4">
-        {messages.map((msg, index) => (
-          <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`p-3 rounded-lg max-w-xs shadow-sm ${msg.sender === 'user' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800'}`}>
-                <p>{msg.text}</p>
+        {messages.map((msg, index) =>
+          msg.sender === 'user' ? (
+            <div key={index} className="flex justify-end">
+              <div className="p-3 rounded-lg max-w-xs shadow-sm bg-indigo-500 text-white">
+                <p className="break-words">{msg.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ) : (
+            <div key={index} className="flex items-end space-x-2">
+              <img
+                src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/radbotprofile.png"
+                alt="RADbot profile"
+                className="w-8 h-8 rounded-full shadow-sm"
+              />
+              <div className="p-3 rounded-lg max-w-xs shadow-sm bg-gray-200 text-gray-800 rounded-bl-none">
+                <p className="break-words">{msg.text}</p>
+              </div>
+            </div>
+          )
+        )}
         {isLoading && (
-            <div className="flex justify-start">
-                <div className="bg-gray-200 p-3 rounded-lg shadow-sm">
-                    <div className="flex items-center space-x-1">
-                        <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                        <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                        <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce"></span>
-                    </div>
+          <div className="flex items-end space-x-2">
+            <img
+              src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/Elements/radbotprofile.png"
+              alt="RADbot profile"
+              className="w-8 h-8 rounded-full shadow-sm"
+            />
+            <div className="bg-gray-200 p-3 rounded-lg shadow-sm rounded-bl-none">
+                <div className="flex items-center space-x-1">
+                    <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                    <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                    <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce"></span>
                 </div>
             </div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </main>
@@ -138,14 +161,14 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={isLoading}
-            className="flex-grow border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow disabled:opacity-50"
+            className="flex-grow border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#B4D6DD] transition-shadow disabled:opacity-50"
             placeholder="Ask a question..."
             aria-label="Chat input"
           />
           <button 
             onClick={handleSendMessage}
             disabled={isLoading || !inputValue.trim()}
-            className="bg-indigo-600 text-white rounded-full p-3 shadow-md hover:bg-indigo-700 transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-300 disabled:cursor-not-allowed" 
+            className="bg-[#B4D6DD] text-[#1E2E4D] rounded-full p-3 shadow-md hover:bg-[#a2c4cb] transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#B4D6DD] focus:ring-offset-2 disabled:bg-[#B4D6DD]/60 disabled:cursor-not-allowed" 
             aria-label="Send Message"
           >
             <SendIcon className="h-6 w-6"/>
