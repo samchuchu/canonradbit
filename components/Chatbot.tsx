@@ -24,8 +24,7 @@ const SendIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
   const [messages, setMessages] = useState<Message[]>([
-    { sender: 'bot', text: "Hihi RADbot here ~ Do you want to know more about today's LDCT Chest ? Just let me know okway ~~" },
-    { sender: 'bot', text: "Sorry, the server is only accessible during presentation. Talk to you next time !" }
+    { sender: 'bot', text: "Hihi RADbot here ~ Do you want to know more about today's LDCT Chest ? Just let me know okway ~~" }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
