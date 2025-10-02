@@ -56,7 +56,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ onBack }) => {
     setInputValue('');
     setIsLoading(true);
 
-    const webhookUrl = 'http://chuchun8n.duckdns.org:5678/webhook-test/49759958-3d12-4dfe-b1dc-47726130bdbf';
+    const webhookUrl = 'http://chuchun8n.duckdns.org:5678/webhook/radbot';
     const formData = new FormData();
     // The key 'question' should match what your n8n workflow expects.
     formData.append('question', trimmedInput);

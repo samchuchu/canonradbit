@@ -509,11 +509,11 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
         <>
           <div 
             ref={slide4BubblesRef} 
-            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto p-4 z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
+            className="absolute top-4 left-4 right-4 bottom-28 overflow-y-auto px-4 pt-4 pb-[150px] z-10 flex flex-col bg-white/50 backdrop-blur-md rounded-2xl shadow-lg"
             aria-live="polite"
           >
             <div className="flex-grow" />
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-center space-y-[100px]">
               {showSlide4Bubble1 && (
                 <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
@@ -522,7 +522,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble2 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-4">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
                     src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step1.gif" 
                     alt="Step 1 Demo" 
@@ -531,7 +531,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble3 && (
-                <div className="animate-slide-up-fade-in w-full max-w-xs mt-[150px]">
+                <div className="animate-slide-up-fade-in w-full max-w-xs">
                     <GifPlayer 
                         gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step2.gif"
                         duration={5400}
@@ -542,7 +542,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble4 && (
-                 <div className="animate-slide-up-fade-in w-full max-w-xs mt-[150px]">
+                 <div className="animate-slide-up-fade-in w-full max-w-xs">
                     <GifPlayer 
                         gifSrc="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/step3.gif"
                         duration={6600}
@@ -553,7 +553,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble5 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
                     src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam1.gif?t=${new Date().getTime()}`} 
                     alt="SilverBeam filter animation" 
@@ -562,7 +562,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble6 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
                     src={`https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/beam2.gif?t=${new Date().getTime()}`} 
                     alt="SilverBeam filter animation part 2" 
@@ -571,14 +571,14 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble7 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800">
                     So SilverBeam filter is like safety gates, only useful photons are allowed to pass !
                   </p>
                 </div>
               )}
               {showSlide4Bubble8 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-2 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <img 
                     src="https://raw.githubusercontent.com/samchuchu/RADbit/refs/heads/main/gif/filterbunny.gif" 
                     alt="Bunny with filter" 
@@ -587,7 +587,7 @@ const Slide: React.FC<SlideProps> = ({ content }) => {
                 </div>
               )}
               {showSlide4Bubble9 && (
-                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs mt-[150px]">
+                <div className="bg-gray-200/80 backdrop-blur-sm p-4 rounded-lg rounded-bl-none shadow-md animate-slide-up-fade-in max-w-xs">
                   <p className="text-base text-gray-800 mb-2">
                     Advanced intelligent Clear-IQ Engine (AiCE) uses Deep Learning innovation to match the spatial resolution and low-noise properties of advanced model-based iterative reconstructions to produce high quality images without compromising on speed or dose.
                   </p>
