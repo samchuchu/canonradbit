@@ -8,7 +8,9 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        allowedHosts: 'chuchuradbit.duckdns.org',
+      },    
+      allowedHosts: {
+        'chuchuradbit.duckdns.org',
       },
       plugins: [react()],
       define: {
